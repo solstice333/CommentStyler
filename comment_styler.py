@@ -75,9 +75,14 @@ class Parser:
 
 def main():
    arg_parser = argparse.ArgumentParser(
-      description='Keeps comments under 79 columns')
+      description='Keeps comments under |n| columns')
+   arg_parser.add_argument('-n', '--num-col', type=int,
+      help='width as column number. Default is 79.')
    arg_parser.add_argument('INPUT_FILE', help='file containing comments')
    args = arg_parser.parse_args()
+
+   global COLUMN_MAX
+   COLUMN_MAX = args.num_col
 
    parser = Parser(args.INPUT_FILE)
    lines = parser.get_lines()
