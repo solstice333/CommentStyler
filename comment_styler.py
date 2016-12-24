@@ -12,18 +12,19 @@ class Parser:
       first_line = True
 
       while keep_going:
+         def add_on_and_count(s):
+            nonlocal col_cnt
+            nonlocal arr
+            arr[-1] += s
+            col_cnt += len(s)
+
          col_cnt = 0
          arr.append('')
 
-         arr[-1] += self._indent
+         add_on_and_count(self._indent)
          if not self._pds or first_line:
-            arr[-1] += self._comment_char
-         arr[-1] += next_tok
-
-         col_cnt += len(self._indent)
-         if not self._pds or first_line:
-            col_cnt += len(self._comment_char)
-         col_cnt += len(next_tok)
+            add_on_and_count(self._comment_char)
+         add_on_and_count(next_tok)
 
          while True:
             try:
@@ -41,7 +42,6 @@ class Parser:
 
             arr[-1] += next_tok
             col_cnt += len(next_tok)
-
             first_line = False
 
       if self._pds:
