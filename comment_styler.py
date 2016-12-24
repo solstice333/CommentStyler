@@ -1,6 +1,7 @@
 #!python3
 import re
 import argparse
+import os
 
 COLUMN_MAX = 79
 
@@ -82,12 +83,15 @@ def main():
    args = arg_parser.parse_args()
 
    global COLUMN_MAX
-   COLUMN_MAX = args.num_col
+   if args.num_col:
+      COLUMN_MAX = args.num_col
 
    parser = Parser(args.INPUT_FILE)
    lines = parser.get_lines()
-   for line in lines:
-      print(line)
+   with open(args.INPUT_FILE + '.tmp', 'w') as output:
+      for line in lines:
+         output.write(line + "\n")
+   os.rename(args.INPUT_FILE + '.tmp', args.INPUT_FILE)
 
 if __name__ == '__main__':
    main()
