@@ -1,0 +1,8 @@
+   """Backing Store class. Link this to a Cache class
+
+   This class represents a backing store which is the lowest storage
+   to write to after all levels of caches has missed. It is considered
+   persistent non-volatile storage. This class implements
+   the collections.abc.MutableMapping interface which acts as a wrapper on
+   top of shelve.
+   """

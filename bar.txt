@@ -1,0 +1,15 @@
+   // wrapper for upb_pcie_ASI_cmd(). |asi_cmd| is the pointer to a DWORD block
+   // pointing to an array of asi data cmd structures. Each asi data cmd is 8
+   // DWORDs (32 bytes). The array can only hold a maximum of 8 asi cmds
+   // thus, obviously, |num_cmds| cannot be greater than 8; otherwise a
+   // BadValException is thrown. |addr| is the 0 based offset in the 256 byte
+   // command queue on the device controller; defaults to 0. |addr| must be a
+   // 32 byte multiple, otherwise a BadAlignemntException is thrown. |addr|
+   // cannot be greater than 224, implying a field that goes passed the 256
+   // byte command queue, otherwise a BadValException is thrown.
+   // Static member |host| is implicitly applied to the
+   // commands with its member ASICmdNum being automaticaly set based on
+   // |addr|/<size of data cmd in bytes>, in other words, 0-7
+   // within the command queue. Static member |opts| is implicitly
+   // applied if |include_opts| is set to true (default is false). Returns 0 on
+   // success.
