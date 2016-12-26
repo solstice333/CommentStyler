@@ -56,8 +56,9 @@ class Parser:
          comments = comment_file.read()
 
       beginning = re.match(r'^(\s*)([^\w\s]+)', comments)
-      self._indent = re.sub(r'\n*', '', beginning.group(1))
-      self._comment_char = beginning.group(2)
+      self._indent = re.sub(r'\n*', '', 
+         beginning.group(1) if beginning else '')
+      self._comment_char = beginning.group(2) if beginning else ''
       self._pds = True if self._comment_char == '"""' else False
       self._comments = re.sub(re.escape(self._comment_char), '', comments)
       self._word_iter = re.finditer(r'\S+', self._comments)
