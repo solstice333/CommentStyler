@@ -93,6 +93,7 @@ def main():
    with open(args.INPUT_FILE + '.tmp', 'w') as output:
       for line in lines:
          output.write(line + "\n")
+   os.remove(args.INPUT_FILE)
    os.rename(args.INPUT_FILE + '.tmp', args.INPUT_FILE)
 
 if __name__ == '__main__':
